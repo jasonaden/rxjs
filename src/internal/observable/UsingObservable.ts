@@ -31,9 +31,9 @@ export class UsingObservable<T> extends Observable<T> {
    *
    * @see {@link defer}
    *
-   * @param {function(): ISubscription} resourceFactory A function which creates any resource object
+   * @param {function(): AnonymousSubscription} resourceFactory A function which creates any resource object
    * that implements `unsubscribe` method.
-   * @param {function(resource: ISubscription): Observable<T>} observableFactory A function which
+   * @param {function(resource: AnonymousSubscription): Observable<T>} observableFactory A function which
    * creates an Observable, that can use injected resource object.
    * @return {Observable<T>} An Observable that behaves the same as Observable returned by `observableFactory`, but
    * which - when completed, errored or unsubscribed - will also call `unsubscribe` on created resource object.

@@ -11,7 +11,7 @@ export interface AnonymousSubscription {
 
 export type TeardownLogic = AnonymousSubscription | Function | void;
 
-export interface ISubscription extends AnonymousSubscription {
+export interface Subscription extends AnonymousSubscription {
   unsubscribe(): void;
   readonly closed: boolean;
 }
@@ -28,21 +28,25 @@ export interface ISubscription extends AnonymousSubscription {
  *
  * @class Subscription
  */
-export class Subscription implements ISubscription {
-  public static EMPTY: Subscription = (function(empty: any) {
+export class RxSubscription implements Subscription {
+  /** @internal */
+  public static EMPTY: RxSubscription = (function(empty: any) {
     empty.closed = true;
     return empty;
-  }(new Subscription()));
+  }(new RxSubscription()));
+
+  /** @internal */
+  protected _parent: RxSubscription = null;
+  /** @internal */
+  protected _parents: RxSubscription[] = null;
+  /** @internal */
+  private _subscriptions: Subscription[] = null;
 
   /**
    * A flag to indicate whether this Subscription has already been unsubscribed.
    * @type {boolean}
    */
   public closed: boolean = false;
-
-  protected _parent: Subscription = null;
-  protected _parents: Subscription[] = null;
-  private _subscriptions: ISubscription[] = null;
 
   /**
    * @param {function(): void} [unsubscribe] A function describing how to
@@ -141,25 +145,25 @@ export class Subscription implements ISubscription {
    *
    * @param {TeardownLogic} teardown The additional logic to execute on
    * teardown.
-   * @return {Subscription} Returns the Subscription used or created to be
+   * @return {RxSubscription} Returns the Subscription used or created to be
    * added to the inner subscriptions list. This Subscription can be used with
    * `remove()` to remove the passed teardown logic from the inner subscriptions
    * list.
    */
   add(teardown: TeardownLogic): Subscription {
-    if (!teardown || (teardown === Subscription.EMPTY)) {
-      return Subscription.EMPTY;
+    if (!teardown || (teardown === RxSubscription.EMPTY)) {
+      return RxSubscription.EMPTY;
     }
 
     if (teardown === this) {
       return this;
     }
 
-    let subscription = (<Subscription> teardown);
+    let subscription = (<RxSubscription> teardown);
 
     switch (typeof teardown) {
       case 'function':
-        subscription = new Subscription(<(() => void) > teardown);
+        subscription = new RxSubscription(<(() => void) > teardown);
       case 'object':
         if (subscription.closed || typeof subscription.unsubscribe !== 'function') {
           return subscription;
@@ -168,7 +172,7 @@ export class Subscription implements ISubscription {
           return subscription;
         } else if (typeof subscription._addParent !== 'function' /* quack quack */) {
           const tmp = subscription;
-          subscription = new Subscription();
+          subscription = new RxSubscription();
           subscription._subscriptions = [tmp];
         }
         break;
@@ -200,7 +204,8 @@ export class Subscription implements ISubscription {
     }
   }
 
-  private _addParent(parent: Subscription) {
+  /** @internal */
+  private _addParent(parent: RxSubscription) {
     let { _parent, _parents } = this;
     if (!_parent || _parent === parent) {
       // If we don't have a parent, or the new parent is the same as the
@@ -218,5 +223,5 @@ export class Subscription implements ISubscription {
 }
 
 function flattenUnsubscriptionErrors(errors: any[]) {
- return errors.reduce((errs, err) => errs.concat((err instanceof UnsubscriptionError) ? err.errors : err), []);
+  return errors.reduce((errs, err) => errs.concat((err instanceof UnsubscriptionError) ? err.errors : err), []);
 }

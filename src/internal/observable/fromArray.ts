@@ -1,6 +1,6 @@
 import { Observable } from '../Observable';
 import { IScheduler } from '../Scheduler';
-import { Subscription } from '../Subscription';
+import { RxSubscription } from '../Subscription';
 import { subscribeToArray } from '../util/subscribeToArray';
 
 export function fromArray<T>(input: ArrayLike<T>, scheduler?: IScheduler) {
@@ -8,7 +8,7 @@ export function fromArray<T>(input: ArrayLike<T>, scheduler?: IScheduler) {
     return new Observable<T>(subscribeToArray(input));
   } else {
     return new Observable<T>(subscriber => {
-      const sub = new Subscription();
+      const sub = new RxSubscription();
       let i = 0;
       sub.add(scheduler.schedule(function () {
         if (i === input.length) {

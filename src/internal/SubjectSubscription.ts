@@ -1,13 +1,13 @@
 import { Subject } from './Subject';
 import { Observer } from './Observer';
-import { Subscription } from './Subscription';
+import { RxSubscription } from './Subscription';
 
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @ignore
  * @extends {Ignored}
  */
-export class SubjectSubscription<T> extends Subscription {
+export class SubjectSubscription<T> extends RxSubscription {
   closed: boolean = false;
 
   constructor(public subject: Subject<T>, public subscriber: Observer<T>) {

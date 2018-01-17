@@ -1,6 +1,6 @@
 import { Observable } from '../Observable';
 import { IScheduler } from '../Scheduler';
-import { Subscription } from '../Subscription';
+import { RxSubscription } from '../Subscription';
 import { iterator as Symbol_iterator } from '../symbol/iterator';
 import { subscribeToIterable } from '../util/subscribeToIterable';
 
@@ -12,7 +12,7 @@ export function fromIterable<T>(input: Iterable<T>, scheduler: IScheduler) {
     return new Observable<T>(subscribeToIterable(input));
   } else {
     return new Observable<T>(subscriber => {
-      const sub = new Subscription();
+      const sub = new RxSubscription();
       let iterator: Iterator<T>;
       sub.add(() => {
         // Finalize generators

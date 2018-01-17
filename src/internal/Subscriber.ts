@@ -1,6 +1,6 @@
 import { isFunction } from './util/isFunction';
 import { Observer, PartialObserver, empty as emptyObserver } from './Observer';
-import { Subscription } from './Subscription';
+import { RxSubscription } from './Subscription';
 import { rxSubscriber as rxSubscriberSymbol } from '../internal/symbol/rxSubscriber';
 
 /**
@@ -13,7 +13,7 @@ import { rxSubscriber as rxSubscriberSymbol } from '../internal/symbol/rxSubscri
  *
  * @class Subscriber<T>
  */
-export class Subscriber<T> extends Subscription implements Observer<T> {
+export class Subscriber<T> extends RxSubscription implements Observer<T> {
 
   [rxSubscriberSymbol]() { return this; }
 

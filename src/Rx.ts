@@ -145,7 +145,7 @@ import './add/operator/zipAll';
 /* tslint:disable:no-unused-variable */
 export {Operator} from './internal/Operator';
 export {Observer} from './internal/Observer';
-export {Subscription} from './internal/Subscription';
+export {RxSubscription as Subscription} from './internal/Subscription';
 export {Subscriber} from './internal/Subscriber';
 export {AsyncSubject} from './internal/AsyncSubject';
 export {ReplaySubject} from './internal/ReplaySubject';

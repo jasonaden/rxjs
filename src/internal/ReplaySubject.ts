@@ -2,7 +2,7 @@ import { Subject } from './Subject';
 import { IScheduler } from './Scheduler';
 import { queue } from './scheduler/queue';
 import { Subscriber } from './Subscriber';
-import { Subscription } from './Subscription';
+import { RxSubscription, Subscription } from './Subscription';
 import { ObserveOnSubscriber } from './operators/observeOn';
 import { ObjectUnsubscribedError } from './util/ObjectUnsubscribedError';
 import { SubjectSubscription } from './SubjectSubscription';
@@ -37,9 +37,9 @@ export class ReplaySubject<T> extends Subject<T> {
     if (this.closed) {
       throw new ObjectUnsubscribedError();
     } else if (this.hasError) {
-      subscription = Subscription.EMPTY;
+      subscription = RxSubscription.EMPTY;
     } else if (this.isStopped) {
-      subscription = Subscription.EMPTY;
+      subscription = RxSubscription.EMPTY;
     } else {
       this.observers.push(subscriber);
       subscription = new SubjectSubscription(this, subscriber);

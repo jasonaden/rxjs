@@ -1,6 +1,6 @@
 import { Observable } from '../Observable';
 import { Subscriber } from '../Subscriber';
-import { Subscription } from '../Subscription';
+import { RxSubscription, Subscription } from '../Subscription';
 import { IScheduler } from '../Scheduler';
 import { Action } from '../scheduler/Action';
 import { tryCatch } from '..//util/tryCatch';
@@ -219,7 +219,7 @@ interface DispatchState<T> {
 }
 
 function dispatch<T>(this: Action<DispatchState<T>>, state: DispatchState<T>) {
-  const self = (<Subscription> this);
+  const self = (<RxSubscription> this);
   const { source, subscriber, context } = state;
   // XXX: cast to `any` to access to the private field in `source`.
   const { callbackFunc, args, scheduler } = source as any;

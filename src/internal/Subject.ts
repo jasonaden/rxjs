@@ -2,7 +2,7 @@ import { Operator } from './Operator';
 import { Observer } from './Observer';
 import { Observable } from './Observable';
 import { Subscriber } from './Subscriber';
-import { ISubscription, Subscription, TeardownLogic } from './Subscription';
+import { Subscription, RxSubscription, TeardownLogic } from './Subscription';
 import { ObjectUnsubscribedError } from './util/ObjectUnsubscribedError';
 import { SubjectSubscription } from './SubjectSubscription';
 import { rxSubscriber as rxSubscriberSymbol } from '../internal/symbol/rxSubscriber';
@@ -19,7 +19,7 @@ export class SubjectSubscriber<T> extends Subscriber<T> {
 /**
  * @class Subject<T>
  */
-export class Subject<T> extends Observable<T> implements ISubscription {
+export class Subject<T> extends Observable<T> implements Subscription {
 
   [rxSubscriberSymbol]() {
     return new SubjectSubscriber(this);
@@ -112,10 +112,10 @@ export class Subject<T> extends Observable<T> implements ISubscription {
       throw new ObjectUnsubscribedError();
     } else if (this.hasError) {
       subscriber.error(this.thrownError);
-      return Subscription.EMPTY;
+      return RxSubscription.EMPTY;
     } else if (this.isStopped) {
       subscriber.complete();
-      return Subscription.EMPTY;
+      return RxSubscription.EMPTY;
     } else {
       this.observers.push(subscriber);
       return new SubjectSubscription(this, subscriber);
@@ -164,7 +164,7 @@ export class AnonymousSubject<T> extends Subject<T> {
     if (source) {
       return this.source.subscribe(subscriber);
     } else {
-      return Subscription.EMPTY;
+      return RxSubscription.EMPTY;
     }
   }
 }

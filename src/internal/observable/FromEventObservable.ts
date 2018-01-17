@@ -2,7 +2,7 @@ import { Observable } from '../Observable';
 import { tryCatch } from '..//util/tryCatch';
 import { isFunction } from '..//util/isFunction';
 import { errorObject } from '..//util/errorObject';
-import { Subscription } from '../Subscription';
+import { RxSubscription } from '../Subscription';
 import { Subscriber } from '../Subscriber';
 
 const toString: Function = Object.prototype.toString;
@@ -219,7 +219,7 @@ export class FromEventObservable<T> extends Observable<T> {
       throw new TypeError('Invalid event target');
     }
 
-    subscriber.add(new Subscription(unsubscribe));
+    subscriber.add(new RxSubscription(unsubscribe));
   }
 
   protected _subscribe(subscriber: Subscriber<T>) {

@@ -13,7 +13,7 @@ export { queue as queueScheduler } from './internal/scheduler/queue';
 export { animationFrame as animationFrameScheduler } from './internal/scheduler/animationFrame';
 
 /* Subscription */
-export { Subscription } from './internal/Subscription';
+export { RxSubscription as Subscription } from './internal/Subscription';
 
 /* Notification */
 export { Notification } from './internal/Notification';

@@ -1,7 +1,7 @@
 import { PartialObserver } from './Observer';
 import { Operator } from './Operator';
 import { Subscriber } from './Subscriber';
-import { Subscription, AnonymousSubscription, TeardownLogic } from './Subscription';
+import { RxSubscription, Subscription, TeardownLogic } from './Subscription';
 import { root } from './util/root';
 import { toSubscriber } from './util/toSubscriber';
 import { IfObservable } from './observable/IfObservable';
@@ -12,7 +12,7 @@ import { pipeFromArray } from './util/pipe';
 export interface Subscribable<T> {
   subscribe(observerOrNext?: PartialObserver<T> | ((value: T) => void),
             error?: (error: any) => void,
-            complete?: () => void): AnonymousSubscription;
+            complete?: () => void): Subscription;
 }
 
 export type SubscribableOrPromise<T> = Subscribable<T> | PromiseLike<T>;
@@ -72,8 +72,8 @@ export class Observable<T> implements Subscribable<T> {
     return observable;
   }
 
-  subscribe(observer?: PartialObserver<T>): Subscription;
-  subscribe(next?: (value: T) => void, error?: (error: any) => void, complete?: () => void): Subscription;
+  subscribe(observer?: PartialObserver<T>): RxSubscription;
+  subscribe(next?: (value: T) => void, error?: (error: any) => void, complete?: () => void): RxSubscription;
   /**
    * Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.
    *
@@ -185,12 +185,12 @@ export class Observable<T> implements Subscribable<T> {
    * @param {Function} error (optional) A handler for a terminal event resulting from an error. If no error handler is provided,
    *  the error will be thrown as unhandled.
    * @param {Function} complete (optional) A handler for a terminal event resulting from successful completion.
-   * @return {ISubscription} a subscription reference to the registered handlers
+   * @return {Subscription} a subscription reference to the registered handlers
    * @method subscribe
    */
   subscribe(observerOrNext?: PartialObserver<T> | ((value: T) => void),
             error?: (error: any) => void,
-            complete?: () => void): Subscription {
+            complete?: () => void): RxSubscription {
 
     const { operator } = this;
     const sink = toSubscriber(observerOrNext, error, complete);

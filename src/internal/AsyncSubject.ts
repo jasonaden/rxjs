@@ -1,6 +1,6 @@
 import { Subject } from './Subject';
 import { Subscriber } from './Subscriber';
-import { Subscription } from './Subscription';
+import { RxSubscription, Subscription } from './Subscription';
 
 /**
  * @class AsyncSubject<T>
@@ -13,11 +13,11 @@ export class AsyncSubject<T> extends Subject<T> {
   protected _subscribe(subscriber: Subscriber<any>): Subscription {
     if (this.hasError) {
       subscriber.error(this.thrownError);
-      return Subscription.EMPTY;
+      return RxSubscription.EMPTY;
     } else if (this.hasCompleted && this.hasNext) {
       subscriber.next(this.value);
       subscriber.complete();
-      return Subscription.EMPTY;
+      return RxSubscription.EMPTY;
     }
     return super._subscribe(subscriber);
   }

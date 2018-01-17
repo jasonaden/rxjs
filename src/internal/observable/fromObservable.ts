@@ -1,6 +1,6 @@
 import { Observable, Subscribable } from '../Observable';
 import { IScheduler } from '../Scheduler';
-import { Subscription } from '../Subscription';
+import { RxSubscription } from '../Subscription';
 import { observable as Symbol_observable } from '../symbol/observable';
 import { subscribeToObservable } from '../util/subscribeToObservable';
 
@@ -10,7 +10,7 @@ export function fromObservable<T>(input: any, scheduler: IScheduler) {
     return new Observable<T>(subscribeToObservable(input));
   } else {
     return new Observable<T>(subscriber => {
-      const sub = new Subscription();
+      const sub = new RxSubscription();
       sub.add(scheduler.schedule(() => {
         const observable: Subscribable<T> = input[Symbol_observable]();
         sub.add(observable.subscribe({

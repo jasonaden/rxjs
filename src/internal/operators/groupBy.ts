@@ -1,5 +1,5 @@
 import { Subscriber } from '../Subscriber';
-import { Subscription } from '../Subscription';
+import { RxSubscription } from '../Subscription';
 import { Observable } from '../Observable';
 import { Operator } from '../Operator';
 import { Subject } from '../Subject';
@@ -264,7 +264,7 @@ export class GroupedObservable<K, T> extends Observable<T> {
   }
 
   protected _subscribe(subscriber: Subscriber<T>) {
-    const subscription = new Subscription();
+    const subscription = new RxSubscription();
     const { refCountSubscription, groupSubject } = this;
     if (refCountSubscription && !refCountSubscription.closed) {
       subscription.add(new InnerRefCountSubscription(refCountSubscription));
@@ -279,7 +279,7 @@ export class GroupedObservable<K, T> extends Observable<T> {
  * @ignore
  * @extends {Ignored}
  */
-class InnerRefCountSubscription extends Subscription {
+class InnerRefCountSubscription extends RxSubscription {
   constructor(private parent: RefCountSubscription) {
     super();
     parent.count++;

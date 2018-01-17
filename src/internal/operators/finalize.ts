@@ -1,6 +1,6 @@
 import { Operator } from '../Operator';
 import { Subscriber } from '../Subscriber';
-import { Subscription, TeardownLogic } from '../Subscription';
+import { RxSubscription, TeardownLogic } from '../Subscription';
 import { Observable } from '../Observable';
 import { MonoTypeOperatorFunction } from '../../internal/types';
 
@@ -33,6 +33,6 @@ class FinallyOperator<T> implements Operator<T, T> {
 class FinallySubscriber<T> extends Subscriber<T> {
   constructor(destination: Subscriber<T>, callback: () => void) {
     super(destination);
-    this.add(new Subscription(callback));
+    this.add(new RxSubscription(callback));
   }
 }

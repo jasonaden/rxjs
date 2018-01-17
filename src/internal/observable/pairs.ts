@@ -1,7 +1,7 @@
 import { Observable } from '../Observable';
 import { IScheduler } from '../Scheduler';
 import { Subscriber } from '../Subscriber';
-import { Subscription } from '../Subscription';
+import { RxSubscription, Subscription } from '../Subscription';
 import { Action } from '../scheduler/Action';
 
 /**
@@ -50,7 +50,7 @@ export function pairs<T>(obj: Object, scheduler?: IScheduler): Observable<[strin
   } else {
     return new Observable<[string, T]>(subscriber => {
       const keys = Object.keys(obj);
-      const subscription = new Subscription();
+      const subscription = new RxSubscription();
       subscription.add(
         scheduler.schedule<{ keys: string[], index: number, subscriber: Subscriber<[string, T]>, subscription: Subscription, obj: Object }>
           (dispatch, 0, { keys, index: 0, subscriber, subscription, obj }));
@@ -61,7 +61,8 @@ export function pairs<T>(obj: Object, scheduler?: IScheduler): Observable<[strin
 
 /** @internal */
 export function dispatch<T>(this: Action<any>,
-                            state: { keys: string[], index: number, subscriber: Subscriber<[string, T]>, subscription: Subscription, obj: Object }) {
+                            state: { keys: string[], index: number, subscriber: Subscriber<[string, T]>,
+                              subscription: RxSubscription, obj: Object }) {
   const { keys, index, subscriber, subscription, obj } = state;
   if (!subscriber.closed) {
     if (index < keys.length) {

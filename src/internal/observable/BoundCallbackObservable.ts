@@ -1,6 +1,6 @@
 import { Observable } from '../Observable';
 import { Subscriber } from '../Subscriber';
-import { Subscription } from '../Subscription';
+import { RxSubscription, Subscription } from '../Subscription';
 import { IScheduler } from '../Scheduler';
 import { tryCatch } from '..//util/tryCatch';
 import { errorObject } from '..//util/errorObject';
@@ -226,7 +226,7 @@ export class BoundCallbackObservable<T> extends Observable<T> {
   }
 
   static dispatch<T>(state: { source: BoundCallbackObservable<T>, subscriber: Subscriber<T>, context: any }) {
-    const self = (<Subscription><any>this);
+    const self = (<RxSubscription><any>this);
     const { source, subscriber, context } = state;
     const { callbackFunc, args, scheduler } = source;
     let subject = source.subject;

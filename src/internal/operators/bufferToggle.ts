@@ -1,7 +1,7 @@
 import { Operator } from '../Operator';
 import { Subscriber } from '../Subscriber';
 import { Observable, SubscribableOrPromise } from '../Observable';
-import { Subscription } from '../Subscription';
+import { RxSubscription, Subscription } from '../Subscription';
 import { subscribeToResult } from '..//util/subscribeToResult';
 import { OuterSubscriber } from '../OuterSubscriber';
 import { InnerSubscriber } from '../InnerSubscriber';
@@ -156,7 +156,7 @@ class BufferToggleSubscriber<T, O> extends OuterSubscriber<T, O> {
     const contexts = this.contexts;
 
     const buffer: Array<T> = [];
-    const subscription = new Subscription();
+    const subscription = new RxSubscription();
     const context = { buffer, subscription };
     contexts.push(context);
 

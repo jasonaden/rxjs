@@ -1,6 +1,6 @@
 import { Observable } from '../Observable';
 import { IScheduler } from '../Scheduler';
-import { Subscription } from '../Subscription';
+import { RxSubscription } from '../Subscription';
 import { subscribeToPromise } from '../util/subscribeToPromise';
 
 export function fromPromise<T>(input: Promise<T>, scheduler: IScheduler) {
@@ -8,7 +8,7 @@ export function fromPromise<T>(input: Promise<T>, scheduler: IScheduler) {
     return new Observable<T>(subscribeToPromise(input));
   } else {
     return new Observable<T>(subscriber => {
-      const sub = new Subscription();
+      const sub = new RxSubscription();
       sub.add(scheduler.schedule(() => input.then(
         value => {
           sub.add(scheduler.schedule(() => {

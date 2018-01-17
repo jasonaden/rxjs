@@ -1,6 +1,6 @@
 import { isFunction } from '..//util/isFunction';
 import { Observable } from '../Observable';
-import { Subscription } from '../Subscription';
+import { RxSubscription } from '../Subscription';
 import { Subscriber } from '../Subscriber';
 
 /**
@@ -83,7 +83,7 @@ export class FromEventPatternObservable<T> extends Observable<T> {
       return;
     }
 
-    subscriber.add(new Subscription(() => {
+    subscriber.add(new RxSubscription(() => {
       //TODO: determine whether or not to forward to error handler
       removeHandler(handler, retValue) ;
     }));

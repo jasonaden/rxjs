@@ -2,7 +2,7 @@ import { Subject, SubjectSubscriber } from '../Subject';
 import { Operator } from '../Operator';
 import { Observable } from '../Observable';
 import { Subscriber } from '../Subscriber';
-import { Subscription, TeardownLogic } from '../Subscription';
+import { RxSubscription, Subscription, TeardownLogic } from '../Subscription';
 import { refCount as higherOrderRefCount } from '../../internal/operators/refCount';
 
 /**
@@ -12,7 +12,7 @@ export class ConnectableObservable<T> extends Observable<T> {
 
   protected _subject: Subject<T>;
   protected _refCount: number = 0;
-  protected _connection: Subscription;
+  protected _connection: RxSubscription;
   _isComplete = false;
 
   constructor(protected source: Observable<T>,
@@ -36,12 +36,12 @@ export class ConnectableObservable<T> extends Observable<T> {
     let connection = this._connection;
     if (!connection) {
       this._isComplete = false;
-      connection = this._connection = new Subscription();
+      connection = this._connection = new RxSubscription();
       connection.add(this.source
         .subscribe(new ConnectableSubscriber(this.getSubject(), this)));
       if (connection.closed) {
         this._connection = null;
-        connection = Subscription.EMPTY;
+        connection = RxSubscription.EMPTY;
       } else {
         this._connection = connection;
       }

@@ -2,7 +2,7 @@ import { Operator } from '../Operator';
 import { Subscriber } from '../Subscriber';
 import { Observable } from '../Observable';
 import { Subject } from '../Subject';
-import { Subscription } from '../Subscription';
+import { RxSubscription, Subscription } from '../Subscription';
 import { tryCatch } from '..//util/tryCatch';
 import { errorObject } from '..//util/errorObject';
 import { OuterSubscriber } from '../OuterSubscriber';
@@ -161,7 +161,7 @@ class WindowToggleSubscriber<T, O> extends OuterSubscriber<T, any> {
         return this.error(errorObject.e);
       } else {
         const window = new Subject<T>();
-        const subscription = new Subscription();
+        const subscription = new RxSubscription();
         const context = { window, subscription };
         this.contexts.push(context);
         const innerSubscription = subscribeToResult(this, closingNotifier, context as any);
