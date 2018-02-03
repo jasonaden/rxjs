@@ -1,12 +1,12 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { mergeMap } from '../../internal/patching/operator/mergeMap';
 
-Observable.prototype.mergeMap = <any>mergeMap;
-Observable.prototype.flatMap = <any>mergeMap;
+RxObservable.prototype.mergeMap = <any>mergeMap;
+RxObservable.prototype.flatMap = <any>mergeMap;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     flatMap: typeof mergeMap;
     mergeMap: typeof mergeMap;
   }

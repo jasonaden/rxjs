@@ -4,7 +4,7 @@
 // definition
 export {Subject, AnonymousSubject} from './internal/Subject';
 /* tslint:enable:no-unused-variable */
-export {Observable} from './internal/Observable';
+export {RxObservable as Observable} from './internal/Observable';
 
 // statics
 /* tslint:disable:no-use-before-declare */

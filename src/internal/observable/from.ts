@@ -1,4 +1,4 @@
-import { Observable, ObservableInput} from '../Observable';
+import { ObservableInput, RxObservable } from '../Observable';
 import { IScheduler } from '../Scheduler';
 import { isPromise } from '../util/isPromise';
 import { isArrayLike } from '../util/isArrayLike';
@@ -10,12 +10,12 @@ import { fromIterable } from './fromIterable';
 import { fromObservable } from './fromObservable';
 import { subscribeTo } from '../util/subscribeTo';
 
-export function from<T>(input: ObservableInput<T>, scheduler?: IScheduler): Observable<T> {
+export function from<T>(input: ObservableInput<T>, scheduler?: IScheduler): RxObservable<T> {
   if (!scheduler) {
-    if (input instanceof Observable) {
+    if (input instanceof RxObservable) {
       return input;
     }
-    return new Observable(subscribeTo(input));
+    return new RxObservable(subscribeTo(input));
   }
 
   if (input != null) {

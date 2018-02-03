@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { timeout } from '../../internal/patching/operator/timeout';
 
-Observable.prototype.timeout = timeout;
+RxObservable.prototype.timeout = timeout;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     timeout: typeof timeout;
   }
 }

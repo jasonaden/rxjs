@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { fromEvent as staticFromEvent } from '../../internal/observable/fromEvent';
 
-Observable.fromEvent = staticFromEvent;
+RxObservable.fromEvent = staticFromEvent;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let fromEvent: typeof staticFromEvent;
   }
 }

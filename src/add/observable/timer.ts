@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { timer as staticTimer } from '../../internal/observable/timer';
 
-Observable.timer = staticTimer;
+RxObservable.timer = staticTimer;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let timer: typeof staticTimer;
   }
 }

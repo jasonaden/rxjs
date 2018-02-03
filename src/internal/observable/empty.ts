@@ -1,11 +1,11 @@
-import { Observable } from '../Observable';
+import { RxObservable } from '../Observable';
 import { IScheduler } from '../Scheduler';
 
 /**
  * The same Observable instance returned by any call to {@link empty} without a
  * {@link Scheduler}. It is preferrable to use this over `empty()`.
  */
-export const EMPTY = new Observable<never>(subscriber => subscriber.complete());
+export const EMPTY = new RxObservable<never>(subscriber => subscriber.complete());
 
 /**
  * Creates an Observable that emits no items to the Observer and immediately
@@ -55,5 +55,5 @@ export function empty(scheduler?: IScheduler) {
 }
 
 export function emptyScheduled(scheduler: IScheduler) {
-  return new Observable<never>(subscriber => scheduler.schedule(() => subscriber.complete()));
+  return new RxObservable<never>(subscriber => scheduler.schedule(() => subscriber.complete()));
 }

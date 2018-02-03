@@ -1,4 +1,4 @@
-import { Observable, ObservableInput } from '../Observable';
+import { ObservableInput, RxObservable } from '../Observable';
 import { isArray } from '../util/isArray';
 import { EMPTY } from './empty';
 import { subscribeToResult } from '../util/subscribeToResult';
@@ -7,23 +7,23 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { Subscriber } from '../Subscriber';
 
 /* tslint:disable:max-line-length */
-export function forkJoin<T, T2>(v1: ObservableInput<T>, v2: ObservableInput<T2>): Observable<[T, T2]>;
-export function forkJoin<T, T2, T3>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>): Observable<[T, T2, T3]>;
-export function forkJoin<T, T2, T3, T4>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>): Observable<[T, T2, T3, T4]>;
-export function forkJoin<T, T2, T3, T4, T5>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>): Observable<[T, T2, T3, T4, T5]>;
-export function forkJoin<T, T2, T3, T4, T5, T6>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>, v6: ObservableInput<T6>): Observable<[T, T2, T3, T4, T5, T6]>;
-export function forkJoin<T, R>(v1: ObservableInput<T>, project: (v1: T) => R): Observable<R>;
-export function forkJoin<T, T2, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, project: (v1: T, v2: T2) => R): Observable<R>;
-export function forkJoin<T, T2, T3, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, project: (v1: T, v2: T2, v3: T3) => R): Observable<R>;
-export function forkJoin<T, T2, T3, T4, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, project: (v1: T, v2: T2, v3: T3, v4: T4) => R): Observable<R>;
-export function forkJoin<T, T2, T3, T4, T5, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>, project: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => R): Observable<R>;
-export function forkJoin<T, T2, T3, T4, T5, T6, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>, v6: ObservableInput<T6>, project: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => R): Observable<R>;
-export function forkJoin<T>(sources: Array<ObservableInput<T>>): Observable<T[]>;
-export function forkJoin<R>(sources: Array<ObservableInput<any>>): Observable<R>;
-export function forkJoin<T, R>(sources: Array<ObservableInput<T>>, project: (...values: T[]) => R): Observable<R>;
-export function forkJoin<R>(sources: Array<ObservableInput<any>>, project: (...values: any[]) => R): Observable<R>;
-export function forkJoin<T>(...sources: Array<ObservableInput<T>>): Observable<T[]>;
-export function forkJoin<R>(...sources: Array<ObservableInput<any>>): Observable<R>;
+export function forkJoin<T, T2>(v1: ObservableInput<T>, v2: ObservableInput<T2>): RxObservable<[T, T2]>;
+export function forkJoin<T, T2, T3>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>): RxObservable<[T, T2, T3]>;
+export function forkJoin<T, T2, T3, T4>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>): RxObservable<[T, T2, T3, T4]>;
+export function forkJoin<T, T2, T3, T4, T5>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>): RxObservable<[T, T2, T3, T4, T5]>;
+export function forkJoin<T, T2, T3, T4, T5, T6>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>, v6: ObservableInput<T6>): RxObservable<[T, T2, T3, T4, T5, T6]>;
+export function forkJoin<T, R>(v1: ObservableInput<T>, project: (v1: T) => R): RxObservable<R>;
+export function forkJoin<T, T2, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, project: (v1: T, v2: T2) => R): RxObservable<R>;
+export function forkJoin<T, T2, T3, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, project: (v1: T, v2: T2, v3: T3) => R): RxObservable<R>;
+export function forkJoin<T, T2, T3, T4, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, project: (v1: T, v2: T2, v3: T3, v4: T4) => R): RxObservable<R>;
+export function forkJoin<T, T2, T3, T4, T5, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>, project: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => R): RxObservable<R>;
+export function forkJoin<T, T2, T3, T4, T5, T6, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>, v6: ObservableInput<T6>, project: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => R): RxObservable<R>;
+export function forkJoin<T>(sources: Array<ObservableInput<T>>): RxObservable<T[]>;
+export function forkJoin<R>(sources: Array<ObservableInput<any>>): RxObservable<R>;
+export function forkJoin<T, R>(sources: Array<ObservableInput<T>>, project: (...values: T[]) => R): RxObservable<R>;
+export function forkJoin<R>(sources: Array<ObservableInput<any>>, project: (...values: any[]) => R): RxObservable<R>;
+export function forkJoin<T>(...sources: Array<ObservableInput<T>>): RxObservable<T[]>;
+export function forkJoin<R>(...sources: Array<ObservableInput<any>>): RxObservable<R>;
 /* tslint:enable:max-line-length */
 
 /**
@@ -133,7 +133,7 @@ export function forkJoin<R>(...sources: Array<ObservableInput<any>>): Observable
  */
 export function forkJoin<T, R>(...sources: Array<ObservableInput<T> |
                                 Array<ObservableInput<T>> |
-                                ((...values: T[]) => R)>): Observable<R> {
+                                ((...values: T[]) => R)>): RxObservable<R> {
   if (sources === null || arguments.length === 0) {
     return EMPTY;
   }
@@ -153,7 +153,7 @@ export function forkJoin<T, R>(...sources: Array<ObservableInput<T> |
     return EMPTY;
   }
 
-  return new Observable(subscriber => {
+  return new RxObservable(subscriber => {
     return new ForkJoinSubscriber(subscriber, sources as Array<ObservableInput<T>>, resultSelector);
   });
 }

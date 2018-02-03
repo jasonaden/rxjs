@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { exhaustMap } from '../../internal/patching/operator/exhaustMap';
 
-Observable.prototype.exhaustMap = exhaustMap;
+RxObservable.prototype.exhaustMap = exhaustMap;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     exhaustMap: typeof exhaustMap;
   }
 }

@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { isEmpty } from '../../internal/patching/operator/isEmpty';
 
-Observable.prototype.isEmpty = isEmpty;
+RxObservable.prototype.isEmpty = isEmpty;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     isEmpty: typeof isEmpty;
   }
 }

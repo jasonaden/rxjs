@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { find } from '../../internal/patching/operator/find';
 
-Observable.prototype.find = find;
+RxObservable.prototype.find = find;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     find: typeof find;
   }
 }

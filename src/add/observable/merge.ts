@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { merge as mergeStatic } from '../../internal/observable/merge';
 
-Observable.merge = mergeStatic;
+RxObservable.merge = mergeStatic;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let merge: typeof mergeStatic;
   }
 }

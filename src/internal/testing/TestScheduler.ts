@@ -1,4 +1,4 @@
-import { Observable } from '../Observable';
+import { Observable, RxObservable } from '../Observable';
 import { Notification } from '../Notification';
 import { ColdObservable } from './ColdObservable';
 import { HotObservable } from './HotObservable';
@@ -83,7 +83,7 @@ export class TestScheduler extends VirtualTimeScheduler {
       subscription = observable.subscribe(x => {
         let value = x;
         // Support Observable-of-Observables
-        if (x instanceof Observable) {
+        if (x instanceof RxObservable) {
           value = this.materializeInnerObservable(value, this.frame);
         }
         actual.push({ frame: this.frame, notification: Notification.createNext(value) });

@@ -1,4 +1,4 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { throwError } from '../../internal/observable/throwError';
 
-(Observable as any).throw = throwError;
+(RxObservable as any).throw = throwError;

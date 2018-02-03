@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { distinct } from '../../internal/patching/operator/distinct';
 
-Observable.prototype.distinct = distinct;
+RxObservable.prototype.distinct = distinct;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     distinct: typeof distinct;
   }
 }

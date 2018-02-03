@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { pairs as staticPairs } from '../../internal/observable/pairs';
 
-Observable.pairs = staticPairs;
+RxObservable.pairs = staticPairs;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let pairs: typeof staticPairs;
   }
 }

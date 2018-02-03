@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { using as staticUsing } from '../../internal/observable/using';
 
-Observable.using = staticUsing;
+RxObservable.using = staticUsing;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let using: typeof staticUsing;
   }
 }

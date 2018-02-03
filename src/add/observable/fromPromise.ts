@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { fromPromise as staticFromPromise } from '../../internal/observable/fromPromise';
 
-Observable.fromPromise = staticFromPromise;
+RxObservable.fromPromise = staticFromPromise;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let fromPromise: typeof staticFromPromise;
   }
 }

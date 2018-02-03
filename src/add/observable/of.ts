@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { of as staticOf } from '../../internal/observable/of';
 
-Observable.of = staticOf;
+RxObservable.of = staticOf;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let of: typeof staticOf; //formOf an iceberg!
   }
 }

@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { elementAt } from '../../internal/patching/operator/elementAt';
 
-Observable.prototype.elementAt = elementAt;
+RxObservable.prototype.elementAt = elementAt;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     elementAt: typeof elementAt;
   }
 }

@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { windowCount } from '../../internal/patching/operator/windowCount';
 
-Observable.prototype.windowCount = windowCount;
+RxObservable.prototype.windowCount = windowCount;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     windowCount: typeof windowCount;
   }
 }

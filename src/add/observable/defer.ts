@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { defer as staticDefer } from '../../internal/observable/defer';
 
-Observable.defer = staticDefer;
+RxObservable.defer = staticDefer;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let defer: typeof staticDefer;
   }
 }

@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { pairwise } from '../../internal/patching/operator/pairwise';
 
-Observable.prototype.pairwise = pairwise;
+RxObservable.prototype.pairwise = pairwise;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     pairwise: typeof pairwise;
   }
 }

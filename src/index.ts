@@ -1,5 +1,5 @@
 /* Observable */
-export { Observable } from './internal/Observable';
+export { RxObservable as Observable } from './internal/Observable';
 
 /* Subjects */
 export { Subject } from './internal/Subject';

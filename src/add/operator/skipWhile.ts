@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { skipWhile } from '../../internal/patching/operator/skipWhile';
 
-Observable.prototype.skipWhile = skipWhile;
+RxObservable.prototype.skipWhile = skipWhile;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     skipWhile: typeof skipWhile;
   }
 }

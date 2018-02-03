@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { mergeAll } from '../../internal/patching/operator/mergeAll';
 
-Observable.prototype.mergeAll = mergeAll;
+RxObservable.prototype.mergeAll = mergeAll;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     mergeAll: typeof mergeAll;
   }
 }

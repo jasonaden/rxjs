@@ -1,4 +1,4 @@
-import { Observable } from '../Observable';
+import { Observable, RxObservable } from '../Observable';
 import { RxSubscription } from '../Subscription';
 import { Scheduler } from '../Scheduler';
 import { TestMessage } from './TestMessage';
@@ -12,7 +12,7 @@ import { Subscriber } from '../Subscriber';
  * @ignore
  * @extends {Ignored}
  */
-export class ColdObservable<T> extends Observable<T> implements SubscriptionLoggable {
+export class ColdObservable<T> extends RxObservable<T> implements SubscriptionLoggable {
   public subscriptions: SubscriptionLog[] = [];
   scheduler: Scheduler;
   logSubscribedFrame: () => number;

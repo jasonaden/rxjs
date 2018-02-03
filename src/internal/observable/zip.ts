@@ -1,4 +1,4 @@
-import { Observable, ObservableInput } from '../Observable';
+import { Observable, ObservableInput, RxObservable } from '../Observable';
 import { fromArray } from './fromArray';
 import { isArray } from '..//util/isArray';
 import { Operator } from '../Operator';
@@ -10,27 +10,27 @@ import { subscribeToResult } from '..//util/subscribeToResult';
 import { iterator as Symbol_iterator } from '../../internal/symbol/iterator';
 
 /* tslint:disable:max-line-length */
-export function zip<T, R>(v1: ObservableInput<T>, project: (v1: T) => R): Observable<R>;
-export function zip<T, T2, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, project: (v1: T, v2: T2) => R): Observable<R>;
-export function zip<T, T2, T3, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, project: (v1: T, v2: T2, v3: T3) => R): Observable<R>;
-export function zip<T, T2, T3, T4, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, project: (v1: T, v2: T2, v3: T3, v4: T4) => R): Observable<R>;
-export function zip<T, T2, T3, T4, T5, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>, project: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => R): Observable<R>;
-export function zip<T, T2, T3, T4, T5, T6, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>, v6: ObservableInput<T6>, project: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => R): Observable<R>;
+export function zip<T, R>(v1: ObservableInput<T>, project: (v1: T) => R): RxObservable<R>;
+export function zip<T, T2, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, project: (v1: T, v2: T2) => R): RxObservable<R>;
+export function zip<T, T2, T3, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, project: (v1: T, v2: T2, v3: T3) => R): RxObservable<R>;
+export function zip<T, T2, T3, T4, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, project: (v1: T, v2: T2, v3: T3, v4: T4) => R): RxObservable<R>;
+export function zip<T, T2, T3, T4, T5, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>, project: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => R): RxObservable<R>;
+export function zip<T, T2, T3, T4, T5, T6, R>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>, v6: ObservableInput<T6>, project: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => R): RxObservable<R>;
 
-export function zip<T, T2>(v1: ObservableInput<T>, v2: ObservableInput<T2>): Observable<[T, T2]>;
-export function zip<T, T2, T3>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>): Observable<[T, T2, T3]>;
-export function zip<T, T2, T3, T4>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>): Observable<[T, T2, T3, T4]>;
-export function zip<T, T2, T3, T4, T5>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>): Observable<[T, T2, T3, T4, T5]>;
-export function zip<T, T2, T3, T4, T5, T6>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>, v6: ObservableInput<T6>): Observable<[T, T2, T3, T4, T5, T6]>;
+export function zip<T, T2>(v1: ObservableInput<T>, v2: ObservableInput<T2>): RxObservable<[T, T2]>;
+export function zip<T, T2, T3>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>): RxObservable<[T, T2, T3]>;
+export function zip<T, T2, T3, T4>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>): RxObservable<[T, T2, T3, T4]>;
+export function zip<T, T2, T3, T4, T5>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>): RxObservable<[T, T2, T3, T4, T5]>;
+export function zip<T, T2, T3, T4, T5, T6>(v1: ObservableInput<T>, v2: ObservableInput<T2>, v3: ObservableInput<T3>, v4: ObservableInput<T4>, v5: ObservableInput<T5>, v6: ObservableInput<T6>): RxObservable<[T, T2, T3, T4, T5, T6]>;
 
-export function zip<T>(array: ObservableInput<T>[]): Observable<T[]>;
-export function zip<R>(array: ObservableInput<any>[]): Observable<R>;
-export function zip<T, R>(array: ObservableInput<T>[], project: (...values: Array<T>) => R): Observable<R>;
-export function zip<R>(array: ObservableInput<any>[], project: (...values: Array<any>) => R): Observable<R>;
+export function zip<T>(array: ObservableInput<T>[]): RxObservable<T[]>;
+export function zip<R>(array: ObservableInput<any>[]): RxObservable<R>;
+export function zip<T, R>(array: ObservableInput<T>[], project: (...values: Array<T>) => R): RxObservable<R>;
+export function zip<R>(array: ObservableInput<any>[], project: (...values: Array<any>) => R): RxObservable<R>;
 
-export function zip<T>(...observables: Array<ObservableInput<T>>): Observable<T[]>;
-export function zip<T, R>(...observables: Array<ObservableInput<T> | ((...values: Array<T>) => R)>): Observable<R>;
-export function zip<R>(...observables: Array<ObservableInput<any> | ((...values: Array<any>) => R)>): Observable<R>;
+export function zip<T>(...observables: Array<ObservableInput<T>>): RxObservable<T[]>;
+export function zip<T, R>(...observables: Array<ObservableInput<T> | ((...values: Array<T>) => R)>): RxObservable<R>;
+export function zip<R>(...observables: Array<ObservableInput<any> | ((...values: Array<any>) => R)>): RxObservable<R>;
 /* tslint:enable:max-line-length */
 
 /**
@@ -64,7 +64,7 @@ export function zip<R>(...observables: Array<ObservableInput<any> | ((...values:
  * @name zip
  * @owner Observable
  */
-export function zip<T, R>(...observables: Array<ObservableInput<any> | ((...values: Array<any>) => R)>): Observable<R> {
+export function zip<T, R>(...observables: Array<ObservableInput<any> | ((...values: Array<any>) => R)>): RxObservable<R> {
   const project = <((...ys: Array<any>) => R)> observables[observables.length - 1];
   if (typeof project === 'function') {
     observables.pop();

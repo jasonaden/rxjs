@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { concatAll } from '../../internal/patching/operator/concatAll';
 
-Observable.prototype.concatAll = concatAll;
+RxObservable.prototype.concatAll = concatAll;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     concatAll: typeof concatAll;
   }
 }

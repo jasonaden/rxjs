@@ -1,10 +1,10 @@
-import { Observable } from '../../../internal/Observable';
+import { RxObservable } from '../../../internal/Observable';
 import { webSocket as staticWebSocket } from '../../../internal/observable/dom/webSocket';
 
-Observable.webSocket = staticWebSocket;
+RxObservable.webSocket = staticWebSocket;
 
 declare module '../../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let webSocket: typeof staticWebSocket;
   }
 }

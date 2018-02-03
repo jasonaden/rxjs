@@ -1,13 +1,13 @@
-import { Observable } from '../Observable';
+import { RxObservable } from '../Observable';
 import { IScheduler } from '../Scheduler';
 import { RxSubscription } from '../Subscription';
 import { subscribeToArray } from '../util/subscribeToArray';
 
-export function fromArray<T>(input: ArrayLike<T>, scheduler?: IScheduler) {
+export function fromArray<T>(input: ArrayLike<T>, scheduler?: IScheduler): RxObservable<T> {
   if (!scheduler) {
-    return new Observable<T>(subscribeToArray(input));
+    return new RxObservable<T>(subscribeToArray(input));
   } else {
-    return new Observable<T>(subscriber => {
+    return new RxObservable<T>(subscriber => {
       const sub = new RxSubscription();
       let i = 0;
       sub.add(scheduler.schedule(function () {

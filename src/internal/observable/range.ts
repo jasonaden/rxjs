@@ -1,5 +1,5 @@
 import { IScheduler } from '../Scheduler';
-import { Observable } from '../Observable';
+import { RxObservable } from '../Observable';
 import { Action } from '../scheduler/Action';
 
 /**
@@ -34,8 +34,8 @@ import { Action } from '../scheduler/Action';
  */
 export function range(start: number = 0,
                       count: number = 0,
-                      scheduler?: IScheduler): Observable<number> {
-  return new Observable<number>(subscriber => {
+                      scheduler?: IScheduler): RxObservable<number> {
+  return new RxObservable<number>(subscriber => {
     let index = 0;
 
     if (scheduler) {

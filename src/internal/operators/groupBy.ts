@@ -1,6 +1,6 @@
 import { Subscriber } from '../Subscriber';
 import { RxSubscription } from '../Subscription';
-import { Observable } from '../Observable';
+import { Observable, RxObservable } from '../Observable';
 import { Operator } from '../Operator';
 import { Subject } from '../Subject';
 import { OperatorFunction } from '../../internal/types';
@@ -256,7 +256,7 @@ class GroupDurationSubscriber<K, T> extends Subscriber<T> {
  *
  * @class GroupedObservable<K, T>
  */
-export class GroupedObservable<K, T> extends Observable<T> {
+export class GroupedObservable<K, T> extends RxObservable<T> {
   constructor(public key: K,
               private groupSubject: Subject<T>,
               private refCountSubscription?: RefCountSubscription) {

@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { window } from '../../internal/patching/operator/window';
 
-Observable.prototype.window = window;
+RxObservable.prototype.window = window;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     window: typeof window;
   }
 }

@@ -1,4 +1,4 @@
-import { Observable } from '../Observable';
+import { RxObservable } from '../Observable';
 import { async } from '../scheduler/async';
 import { IScheduler } from '../Scheduler';
 import { isNumeric } from '../util/isNumeric';
@@ -39,7 +39,7 @@ import { Action } from '../scheduler/Action';
  * @owner Observable
  */
 export function interval(period = 0,
-                         scheduler: IScheduler = async): Observable<number> {
+                         scheduler: IScheduler = async): RxObservable<number> {
   if (!isNumeric(period) || period < 0) {
     period = 0;
   }
@@ -48,7 +48,7 @@ export function interval(period = 0,
     scheduler = async;
   }
 
-  return new Observable<number>(subscriber => {
+  return new RxObservable<number>(subscriber => {
     subscriber.add(
       scheduler.schedule(dispatch, period, { subscriber, counter: 0, period })
     );

@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { generate as staticGenerate } from '../../internal/observable/generate';
 
-Observable.generate = staticGenerate;
+RxObservable.generate = staticGenerate;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let generate: typeof staticGenerate;
   }
 }

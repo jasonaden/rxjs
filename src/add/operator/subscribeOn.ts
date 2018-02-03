@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { subscribeOn } from '../../internal/patching/operator/subscribeOn';
 
-Observable.prototype.subscribeOn = subscribeOn;
+RxObservable.prototype.subscribeOn = subscribeOn;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     subscribeOn: typeof subscribeOn;
   }
 }

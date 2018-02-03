@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { range as staticRange } from '../../internal/observable/range';
 
-Observable.range = staticRange;
+RxObservable.range = staticRange;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let range: typeof staticRange;
   }
 }

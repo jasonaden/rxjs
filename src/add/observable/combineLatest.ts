@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { combineLatest as combineLatestStatic } from '../../internal/observable/combineLatest';
 
-Observable.combineLatest = combineLatestStatic;
+RxObservable.combineLatest = combineLatestStatic;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let combineLatest: typeof combineLatestStatic;
   }
 }

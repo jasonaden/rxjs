@@ -1,4 +1,4 @@
-import { Observable } from '../Observable';
+import { RxObservable } from '../Observable';
 import { IScheduler } from '../Scheduler';
 import { async } from '../scheduler/async';
 import { isNumeric } from '../util/isNumeric';
@@ -50,7 +50,7 @@ import { Subscriber } from '../Subscriber';
  */
 export function timer(dueTime: number | Date = 0,
                       periodOrScheduler?: number | IScheduler,
-                      scheduler?: IScheduler): Observable<number> {
+                      scheduler?: IScheduler): RxObservable<number> {
   let period = -1;
   if (isNumeric(periodOrScheduler)) {
     period = Number(periodOrScheduler) < 1 && 1 || Number(periodOrScheduler);
@@ -62,7 +62,7 @@ export function timer(dueTime: number | Date = 0,
     scheduler = async;
   }
 
-  return new Observable(subscriber => {
+  return new RxObservable<number>(subscriber => {
     const due = isNumeric(dueTime)
       ? (dueTime as number)
       : (+dueTime - scheduler.now());

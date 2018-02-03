@@ -1,17 +1,17 @@
-import { Observable } from '../Observable';
+import { RxObservable } from '../Observable';
 import { IScheduler } from '../Scheduler';
 import { RxSubscription } from '../Subscription';
 import { iterator as Symbol_iterator } from '../symbol/iterator';
 import { subscribeToIterable } from '../util/subscribeToIterable';
 
-export function fromIterable<T>(input: Iterable<T>, scheduler: IScheduler) {
+export function fromIterable<T>(input: Iterable<T>, scheduler: IScheduler): RxObservable<T> {
   if (!input) {
     throw new Error('Iterable cannot be null');
   }
   if (!scheduler) {
-    return new Observable<T>(subscribeToIterable(input));
+    return new RxObservable<T>(subscribeToIterable(input));
   } else {
-    return new Observable<T>(subscriber => {
+    return new RxObservable<T>(subscriber => {
       const sub = new RxSubscription();
       let iterator: Iterator<T>;
       sub.add(() => {

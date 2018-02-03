@@ -1,6 +1,6 @@
 import { Subject, AnonymousSubject } from '../../Subject';
 import { Subscriber } from '../../Subscriber';
-import { Observable } from '../../Observable';
+import { Observable, RxObservable } from '../../Observable';
 import { RxSubscription, Subscription } from '../../Subscription';
 import { Operator } from '../../Operator';
 import { root } from '../..//util/root';
@@ -86,7 +86,7 @@ export class WebSocketSubject<T> extends AnonymousSubject<T> {
   }
 
   constructor(urlConfigOrSource: string | WebSocketSubjectConfig | Observable<T>, destination?: Observer<T>) {
-    if (urlConfigOrSource instanceof Observable) {
+    if (urlConfigOrSource instanceof RxObservable) {
       super(destination, <Observable<T>> urlConfigOrSource);
     } else {
       super();
@@ -122,7 +122,7 @@ export class WebSocketSubject<T> extends AnonymousSubject<T> {
   // TODO: factor this out to be a proper Operator/Subscriber implementation and eliminate closures
   multiplex(subMsg: () => any, unsubMsg: () => any, messageFilter: (value: T) => boolean) {
     const self = this;
-    return new Observable((observer: Observer<any>) => {
+    return new RxObservable((observer: Observer<any>) => {
       const result = tryCatch(subMsg)();
       if (result === errorObject) {
         observer.error(errorObject.e);

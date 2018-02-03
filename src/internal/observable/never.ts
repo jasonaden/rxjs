@@ -1,8 +1,8 @@
-import { Observable } from '../Observable';
+import { RxObservable } from '../Observable';
 import { noop } from '../util/noop';
 
 /** @internal */
-export const NEVER = new Observable<never>(noop);
+export const NEVER = new RxObservable<never>(noop);
 
 /**
  * Creates an Observable that emits no items to the Observer.
@@ -35,6 +35,6 @@ export const NEVER = new Observable<never>(noop);
  * @name never
  * @owner Observable
  */
-export function never(): Observable<never> {
+export function never(): RxObservable<never> {
   return NEVER;
 }

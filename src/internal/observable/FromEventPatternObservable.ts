@@ -1,5 +1,5 @@
 import { isFunction } from '..//util/isFunction';
-import { Observable } from '../Observable';
+import { RxObservable } from '../Observable';
 import { RxSubscription } from '../Subscription';
 import { Subscriber } from '../Subscriber';
 
@@ -8,7 +8,7 @@ import { Subscriber } from '../Subscriber';
  * @extends {Ignored}
  * @hide true
  */
-export class FromEventPatternObservable<T> extends Observable<T> {
+export class FromEventPatternObservable<T> extends RxObservable<T> {
 
   /**
    * Creates an Observable from an API based on addHandler/removeHandler

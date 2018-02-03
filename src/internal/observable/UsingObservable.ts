@@ -1,4 +1,4 @@
-import { Observable, SubscribableOrPromise } from '../Observable';
+import { RxObservable, SubscribableOrPromise } from '../Observable';
 import { Subscriber } from '../Subscriber';
 import { AnonymousSubscription, TeardownLogic } from '../Subscription';
 
@@ -9,7 +9,7 @@ import { OuterSubscriber } from '../OuterSubscriber';
  * @extends {Ignored}
  * @hide true
  */
-export class UsingObservable<T> extends Observable<T> {
+export class UsingObservable<T> extends RxObservable<T> {
   /**
    * Creates an Observable that uses a resource which will be disposed at the same time as the Observable.
    *
@@ -42,7 +42,7 @@ export class UsingObservable<T> extends Observable<T> {
    * @owner Observable
    */
   static create<T>(resourceFactory: () => AnonymousSubscription | void,
-                   observableFactory: (resource: AnonymousSubscription) => SubscribableOrPromise<T> | void): Observable<T> {
+                   observableFactory: (resource: AnonymousSubscription) => SubscribableOrPromise<T> | void): RxObservable<T> {
     return new UsingObservable<T>(resourceFactory, observableFactory);
   }
 

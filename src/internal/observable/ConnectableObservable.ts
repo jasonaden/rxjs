@@ -1,23 +1,25 @@
 import { Subject, SubjectSubscriber } from '../Subject';
 import { Operator } from '../Operator';
-import { Observable } from '../Observable';
+import { Observable, RxObservable } from '../Observable';
 import { Subscriber } from '../Subscriber';
 import { RxSubscription, Subscription, TeardownLogic } from '../Subscription';
 import { refCount as higherOrderRefCount } from '../../internal/operators/refCount';
+import { from } from './from';
 
 /**
  * @class ConnectableObservable<T>
  */
-export class ConnectableObservable<T> extends Observable<T> {
+export class ConnectableObservable<T> extends RxObservable<T> {
 
   protected _subject: Subject<T>;
   protected _refCount: number = 0;
   protected _connection: RxSubscription;
   _isComplete = false;
 
-  constructor(protected source: Observable<T>,
+  constructor(source: Observable<T>,
               protected subjectFactory: () => Subject<T>) {
     super();
+    this.source = from(source);
   }
 
   protected _subscribe(subscriber: Subscriber<T>) {

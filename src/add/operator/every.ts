@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { every } from '../../internal/patching/operator/every';
 
-Observable.prototype.every = every;
+RxObservable.prototype.every = every;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     every: typeof every;
   }
 }

@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { materialize } from '../../internal/patching/operator/materialize';
 
-Observable.prototype.materialize = materialize;
+RxObservable.prototype.materialize = materialize;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     materialize: typeof materialize;
   }
 }

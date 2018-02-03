@@ -1,4 +1,4 @@
-import { Observable, SubscribableOrPromise } from '../Observable';
+import { RxObservable, SubscribableOrPromise } from '../Observable';
 import { Subscriber } from '../Subscriber';
 import { TeardownLogic } from '../Subscription';
 
@@ -9,7 +9,7 @@ import { OuterSubscriber } from '../OuterSubscriber';
  * @extends {Ignored}
  * @hide true
  */
-export class IfObservable<T, R> extends Observable<T> {
+export class IfObservable<T, R> extends RxObservable<T> {
 
   /**
    * Decides at subscription time which Observable will actually be subscribed.
@@ -94,7 +94,7 @@ export class IfObservable<T, R> extends Observable<T> {
    */
   static create<T, R>(condition: () => boolean | void,
                       thenSource?: SubscribableOrPromise<T> | void,
-                      elseSource?: SubscribableOrPromise<R> | void): Observable<T|R> {
+                      elseSource?: SubscribableOrPromise<R> | void): RxObservable<T|R> {
     return new IfObservable(condition, thenSource, elseSource);
   }
 

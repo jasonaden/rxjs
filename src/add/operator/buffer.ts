@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { buffer } from '../../internal/patching/operator/buffer';
 
-Observable.prototype.buffer = buffer;
+RxObservable.prototype.buffer = buffer;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     buffer: typeof buffer;
   }
 }

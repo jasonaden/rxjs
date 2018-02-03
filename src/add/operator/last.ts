@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { last } from '../../internal/patching/operator/last';
 
-Observable.prototype.last = <any>last;
+RxObservable.prototype.last = <any>last;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     last: typeof last;
   }
 }

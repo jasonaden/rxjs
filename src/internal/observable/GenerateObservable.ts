@@ -1,6 +1,6 @@
 import { IScheduler } from '../Scheduler';
 import { Action } from '../scheduler/Action';
-import { Observable } from '../Observable' ;
+import { RxObservable } from '../Observable' ;
 import { Subscriber } from '../Subscriber';
 import { Subscription } from '../Subscription';
 import { isScheduler } from '..//util/isScheduler';
@@ -54,7 +54,7 @@ export interface GenerateOptions<T, S> extends GenerateBaseOptions<S> {
  * @extends {Ignored}
  * @hide true
  */
-export class GenerateObservable<T, S> extends Observable<T> {
+export class GenerateObservable<T, S> extends RxObservable<T> {
   constructor(private initialState: S,
               private condition: ConditionFunc<S>,
               private iterate: IterateFunc<S>,
@@ -90,7 +90,7 @@ export class GenerateObservable<T, S> extends Observable<T> {
                       condition: ConditionFunc<S>,
                       iterate: IterateFunc<S>,
                       resultSelector: ResultFunc<S, T>,
-                      scheduler?: IScheduler): Observable<T>;
+                      scheduler?: IScheduler): RxObservable<T>;
 
   /**
    * Generates an observable sequence by running a state-driven loop
@@ -118,7 +118,7 @@ export class GenerateObservable<T, S> extends Observable<T> {
   static create<S>(initialState: S,
                    condition: ConditionFunc<S>,
                    iterate: IterateFunc<S>,
-                   scheduler?: IScheduler): Observable<S>;
+                   scheduler?: IScheduler): RxObservable<S>;
 
   /**
    * Generates an observable sequence by running a state-driven loop
@@ -142,7 +142,7 @@ export class GenerateObservable<T, S> extends Observable<T> {
    * @param {GenerateBaseOptions<S>} options Object that must contain initialState, iterate and might contain condition and scheduler.
    * @returns {Observable<S>} The generated sequence.
    */
-  static create<S>(options: GenerateBaseOptions<S>): Observable<S>;
+  static create<S>(options: GenerateBaseOptions<S>): RxObservable<S>;
 
   /**
    * Generates an observable sequence by running a state-driven loop
@@ -167,13 +167,13 @@ export class GenerateObservable<T, S> extends Observable<T> {
    * @param {GenerateOptions<T, S>} options Object that must contain initialState, iterate, resultSelector and might contain condition and scheduler.
    * @returns {Observable<T>} The generated sequence.
    */
-  static create<T, S>(options: GenerateOptions<T, S>): Observable<T>;
+  static create<T, S>(options: GenerateOptions<T, S>): RxObservable<T>;
 
   static create<T, S>(initialStateOrOptions: S | GenerateOptions<T, S>,
                       condition?: ConditionFunc<S>,
                       iterate?: IterateFunc<S>,
                       resultSelectorOrObservable?: (ResultFunc<S, T>) | IScheduler,
-                      scheduler?: IScheduler): Observable<T> {
+                      scheduler?: IScheduler): RxObservable<T> {
     if (arguments.length == 1) {
       return new GenerateObservable<T, S>(
         (<GenerateOptions<T, S>>initialStateOrOptions).initialState,

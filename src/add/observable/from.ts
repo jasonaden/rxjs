@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { from as staticFrom } from '../../internal/observable/from';
 
-Observable.from = staticFrom;
+RxObservable.from = staticFrom;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let from: typeof staticFrom;
   }
 }

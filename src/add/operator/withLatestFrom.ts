@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { withLatestFrom } from '../../internal/patching/operator/withLatestFrom';
 
-Observable.prototype.withLatestFrom = withLatestFrom;
+RxObservable.prototype.withLatestFrom = withLatestFrom;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     withLatestFrom: typeof withLatestFrom;
   }
 }

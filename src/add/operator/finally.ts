@@ -1,12 +1,12 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { _finally } from '../../internal/patching/operator/finally';
 
-Observable.prototype.finally = _finally;
-Observable.prototype._finally = _finally;
+RxObservable.prototype.finally = _finally;
+RxObservable.prototype._finally = _finally;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     finally: typeof _finally;
     _finally: typeof _finally;
   }

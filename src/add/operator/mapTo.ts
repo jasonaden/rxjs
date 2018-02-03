@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { mapTo } from '../../internal/patching/operator/mapTo';
 
-Observable.prototype.mapTo = mapTo;
+RxObservable.prototype.mapTo = mapTo;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     mapTo: typeof mapTo;
   }
 }

@@ -36,9 +36,9 @@ export class RxSubscription implements Subscription {
   }(new RxSubscription()));
 
   /** @internal */
-  protected _parent: RxSubscription = null;
+  protected _parent: Subscription = null;
   /** @internal */
-  protected _parents: RxSubscription[] = null;
+  protected _parents: Subscription[] = null;
   /** @internal */
   private _subscriptions: Subscription[] = null;
 
@@ -150,7 +150,7 @@ export class RxSubscription implements Subscription {
    * `remove()` to remove the passed teardown logic from the inner subscriptions
    * list.
    */
-  add(teardown: TeardownLogic): Subscription {
+  add(teardown: TeardownLogic): RxSubscription {
     if (!teardown || (teardown === RxSubscription.EMPTY)) {
       return RxSubscription.EMPTY;
     }

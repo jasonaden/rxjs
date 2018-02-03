@@ -1,11 +1,12 @@
 import { Operator } from './Operator';
 import { Observer } from './Observer';
-import { Observable } from './Observable';
+import { Observable, RxObservable } from './Observable';
 import { Subscriber } from './Subscriber';
 import { Subscription, RxSubscription, TeardownLogic } from './Subscription';
 import { ObjectUnsubscribedError } from './util/ObjectUnsubscribedError';
 import { SubjectSubscription } from './SubjectSubscription';
 import { rxSubscriber as rxSubscriberSymbol } from '../internal/symbol/rxSubscriber';
+import { from } from './observable/from';
 
 /**
  * @class SubjectSubscriber<T>
@@ -19,7 +20,7 @@ export class SubjectSubscriber<T> extends Subscriber<T> {
 /**
  * @class Subject<T>
  */
-export class Subject<T> extends Observable<T> implements Subscription {
+export class Subject<T> extends RxObservable<T> implements Subscription {
 
   [rxSubscriberSymbol]() {
     return new SubjectSubscriber(this);
@@ -43,7 +44,7 @@ export class Subject<T> extends Observable<T> implements Subscription {
     return new AnonymousSubject<T>(destination, source);
   }
 
-  lift<R>(operator: Operator<T, R>): Observable<R> {
+  lift<R>(operator: Operator<T, R>): RxObservable<R> {
     const subject = new AnonymousSubject(this, this);
     subject.operator = <any>operator;
     return <any>subject;
@@ -123,7 +124,7 @@ export class Subject<T> extends Observable<T> implements Subscription {
   }
 
   asObservable(): Observable<T> {
-    const observable = new Observable<T>();
+    const observable = new RxObservable<T>();
     (<any>observable).source = this;
     return observable;
   }
@@ -135,7 +136,7 @@ export class Subject<T> extends Observable<T> implements Subscription {
 export class AnonymousSubject<T> extends Subject<T> {
   constructor(protected destination?: Observer<T>, source?: Observable<T>) {
     super();
-    this.source = source;
+    this.source = source && from(source);
   }
 
   next(value: T) {

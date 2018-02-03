@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { bindNodeCallback as staticBindNodeCallback } from '../../internal/observable/bindNodeCallback';
 
-Observable.bindNodeCallback = staticBindNodeCallback;
+RxObservable.bindNodeCallback = staticBindNodeCallback;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let bindNodeCallback: typeof staticBindNodeCallback;
   }
 }

@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { concatMap } from '../../internal/patching/operator/concatMap';
 
-Observable.prototype.concatMap = concatMap;
+RxObservable.prototype.concatMap = concatMap;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     concatMap: typeof concatMap;
   }
 }

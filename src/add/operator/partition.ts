@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { partition } from '../../internal/patching/operator/partition';
 
-Observable.prototype.partition = partition;
+RxObservable.prototype.partition = partition;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     partition: typeof partition;
   }
 }

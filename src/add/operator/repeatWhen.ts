@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { repeatWhen } from '../../internal/patching/operator/repeatWhen';
 
-Observable.prototype.repeatWhen = repeatWhen;
+RxObservable.prototype.repeatWhen = repeatWhen;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     repeatWhen: typeof repeatWhen;
   }
 }

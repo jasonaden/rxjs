@@ -1,4 +1,4 @@
-import { Observable } from '../Observable';
+import { RxObservable } from '../Observable';
 import { Subscriber } from '../Subscriber';
 import { RxSubscription, Subscription } from '../Subscription';
 import { IScheduler } from '../Scheduler';
@@ -12,19 +12,19 @@ import { AsyncSubject } from '../../internal/AsyncSubject';
  * @extends {Ignored}
  * @hide true
  */
-export class BoundNodeCallbackObservable<T> extends Observable<T> {
+export class BoundNodeCallbackObservable<T> extends RxObservable<T> {
   subject: AsyncSubject<T>;
 
   /* tslint:disable:max-line-length */
-  static create<R>(callbackFunc: (callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): () => Observable<R>;
-  static create<T, R>(callbackFunc: (v1: T, callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): (v1: T) => Observable<R>;
-  static create<T, T2, R>(callbackFunc: (v1: T, v2: T2, callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): (v1: T, v2: T2) => Observable<R>;
-  static create<T, T2, T3, R>(callbackFunc: (v1: T, v2: T2, v3: T3, callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): (v1: T, v2: T2, v3: T3) => Observable<R>;
-  static create<T, T2, T3, T4, R>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): (v1: T, v2: T2, v3: T3, v4: T4) => Observable<R>;
-  static create<T, T2, T3, T4, T5, R>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => Observable<R>;
-  static create<T, T2, T3, T4, T5, T6, R>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6, callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => Observable<R>;
-  static create<T>(callbackFunc: Function, selector?: void, scheduler?: IScheduler): (...args: any[]) => Observable<T>;
-  static create<T>(callbackFunc: Function, selector?: (...args: any[]) => T, scheduler?: IScheduler): (...args: any[]) => Observable<T>;
+  static create<R>(callbackFunc: (callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): () => RxObservable<R>;
+  static create<T, R>(callbackFunc: (v1: T, callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): (v1: T) => RxObservable<R>;
+  static create<T, T2, R>(callbackFunc: (v1: T, v2: T2, callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): (v1: T, v2: T2) => RxObservable<R>;
+  static create<T, T2, T3, R>(callbackFunc: (v1: T, v2: T2, v3: T3, callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): (v1: T, v2: T2, v3: T3) => RxObservable<R>;
+  static create<T, T2, T3, T4, R>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): (v1: T, v2: T2, v3: T3, v4: T4) => RxObservable<R>;
+  static create<T, T2, T3, T4, T5, R>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => RxObservable<R>;
+  static create<T, T2, T3, T4, T5, T6, R>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6, callback: (err: any, result: R) => any) => any, selector?: void, scheduler?: IScheduler): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => RxObservable<R>;
+  static create<T>(callbackFunc: Function, selector?: void, scheduler?: IScheduler): (...args: any[]) => RxObservable<T>;
+  static create<T>(callbackFunc: Function, selector?: (...args: any[]) => T, scheduler?: IScheduler): (...args: any[]) => RxObservable<T>;
   /* tslint:enable:max-line-length */
 
   /**
@@ -154,8 +154,8 @@ export class BoundNodeCallbackObservable<T> extends Observable<T> {
    */
   static create<T>(func: Function,
                    selector: Function | void = undefined,
-                   scheduler?: IScheduler): (...args: any[]) => Observable<T> {
-    return function(this: any, ...args: any[]): Observable<T> {
+                   scheduler?: IScheduler): (...args: any[]) => RxObservable<T> {
+    return function(this: any, ...args: any[]): RxObservable<T> {
       return new BoundNodeCallbackObservable<T>(func, <any>selector, args, this, scheduler);
     };
   }

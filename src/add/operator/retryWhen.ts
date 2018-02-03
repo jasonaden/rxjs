@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { retryWhen } from '../../internal/patching/operator/retryWhen';
 
-Observable.prototype.retryWhen = retryWhen;
+RxObservable.prototype.retryWhen = retryWhen;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     retryWhen: typeof retryWhen;
   }
 }

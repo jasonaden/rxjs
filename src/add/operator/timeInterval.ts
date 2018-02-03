@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { timeInterval } from '../../internal/patching/operator/timeInterval';
 
-Observable.prototype.timeInterval = timeInterval;
+RxObservable.prototype.timeInterval = timeInterval;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     timeInterval: typeof timeInterval;
   }
 }

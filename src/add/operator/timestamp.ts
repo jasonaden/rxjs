@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { timestamp } from '../../internal/patching/operator/timestamp';
 
-Observable.prototype.timestamp = timestamp;
+RxObservable.prototype.timestamp = timestamp;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     timestamp: typeof timestamp;
   }
 }

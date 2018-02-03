@@ -1,10 +1,10 @@
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { zip as zipStatic } from '../../internal/observable/zip';
 
-Observable.zip = zipStatic;
+RxObservable.zip = zipStatic;
 
 declare module '../../internal/Observable' {
-  namespace Observable {
+  namespace RxObservable {
     export let zip: typeof zipStatic;
   }
 }

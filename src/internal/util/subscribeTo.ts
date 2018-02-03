@@ -1,4 +1,4 @@
-import { Observable, ObservableInput } from '../Observable';
+import { ObservableInput, RxObservable } from '../Observable';
 import { subscribeToArray } from './subscribeToArray';
 import { subscribeToPromise } from './subscribeToPromise';
 import { subscribeToIterable } from './subscribeToIterable';
@@ -11,9 +11,9 @@ import { observable as Symbol_observable } from '../symbol/observable';
 import { Subscriber } from '../Subscriber';
 
 export const subscribeTo = <T>(result: ObservableInput<T>) => {
-  if (result instanceof Observable) {
+  if (result instanceof RxObservable) {
     return (subscriber: Subscriber<T>) => {
-        if (result._isScalar) {
+        if ((result as any)._isScalar) {
         subscriber.next((result as any).value);
         subscriber.complete();
         return undefined;

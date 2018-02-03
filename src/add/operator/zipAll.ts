@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { zipAll } from '../../internal/patching/operator/zipAll';
 
-Observable.prototype.zipAll = zipAll;
+RxObservable.prototype.zipAll = zipAll;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     zipAll: typeof zipAll;
   }
 }

@@ -1,4 +1,4 @@
-import { Observable } from '../Observable';
+import { Observable, RxObservable } from '../Observable';
 import { isArray } from '..//util/isArray';
 import { fromArray } from './fromArray';
 import { Operator } from '../Operator';
@@ -16,17 +16,17 @@ import { subscribeToResult } from '..//util/subscribeToResult';
  * @name race
  * @owner Observable
  */
-export function race<T>(observables: Array<Observable<T>>): Observable<T>;
-export function race<T>(observables: Array<Observable<any>>): Observable<T>;
-export function race<T>(...observables: Array<Observable<T> | Array<Observable<T>>>): Observable<T>;
-export function race<T>(...observables: Array<Observable<any> | Array<Observable<any>>>): Observable<T> {
+export function race<T>(observables: Array<Observable<T>>): RxObservable<T>;
+export function race<T>(observables: Array<Observable<any>>): RxObservable<T>;
+export function race<T>(...observables: Array<Observable<T> | Array<Observable<T>>>): RxObservable<T>;
+export function race<T>(...observables: Array<Observable<any> | Array<Observable<any>>>): RxObservable<T> {
   // if the only argument is an array, it was most likely called with
   // `race([obs1, obs2, ...])`
   if (observables.length === 1) {
     if (isArray(observables[0])) {
       observables = <Array<Observable<any>>>observables[0];
     } else {
-      return <Observable<any>>observables[0];
+      return <RxObservable<any>>observables[0];
     }
   }
 

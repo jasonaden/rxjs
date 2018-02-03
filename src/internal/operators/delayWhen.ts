@@ -1,11 +1,12 @@
 import { Operator } from '../Operator';
 import { Subscriber } from '../Subscriber';
-import { Observable } from '../Observable';
+import { Observable, RxObservable } from '../Observable';
 import { Subscription, TeardownLogic } from '../Subscription';
 import { OuterSubscriber } from '../OuterSubscriber';
 import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '..//util/subscribeToResult';
 import { MonoTypeOperatorFunction } from '../../internal/types';
+import { from } from '../observable/from';
 
 /**
  * Delays the emission of items from the source Observable by a given time span
@@ -160,9 +161,10 @@ class DelayWhenSubscriber<T, R> extends OuterSubscriber<T, R> {
  * @ignore
  * @extends {Ignored}
  */
-class SubscriptionDelayObservable<T> extends Observable<T> {
-  constructor(protected source: Observable<T>, private subscriptionDelay: Observable<any>) {
+class SubscriptionDelayObservable<T> extends RxObservable<T> {
+  constructor(source: Observable<T>, private subscriptionDelay: Observable<any>) {
     super();
+    this.source = from(source);
   }
 
   protected _subscribe(subscriber: Subscriber<T>) {

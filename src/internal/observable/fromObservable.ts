@@ -1,15 +1,15 @@
-import { Observable, Subscribable } from '../Observable';
+import { RxObservable, Subscribable } from '../Observable';
 import { IScheduler } from '../Scheduler';
 import { RxSubscription } from '../Subscription';
 import { observable as Symbol_observable } from '../symbol/observable';
 import { subscribeToObservable } from '../util/subscribeToObservable';
 
 // tslint:disable-next-line:no-any TS is unable to type [Symbol.observable]
-export function fromObservable<T>(input: any, scheduler: IScheduler) {
+export function fromObservable<T>(input: any, scheduler: IScheduler): RxObservable<T> {
   if (!scheduler) {
-    return new Observable<T>(subscribeToObservable(input));
+    return new RxObservable<T>(subscribeToObservable(input));
   } else {
-    return new Observable<T>(subscriber => {
+    return new RxObservable<T>(subscriber => {
       const sub = new RxSubscription();
       sub.add(scheduler.schedule(() => {
         const observable: Subscribable<T> = input[Symbol_observable]();

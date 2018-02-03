@@ -1,4 +1,4 @@
-import { Observable, SubscribableOrPromise } from '../Observable';
+import { RxObservable, SubscribableOrPromise } from '../Observable';
 import { from } from './from'; // lol
 import { empty } from './empty';
 
@@ -48,8 +48,8 @@ import { empty } from './empty';
  * @name defer
  * @owner Observable
  */
-export function defer<T>(observableFactory: () => SubscribableOrPromise<T> | void): Observable<T> {
-  return new Observable(subscriber => {
+export function defer<T>(observableFactory: () => SubscribableOrPromise<T> | void): RxObservable<T> {
+  return new RxObservable<T>(subscriber => {
     let input: SubscribableOrPromise<T> | void;
     try {
       input = observableFactory();

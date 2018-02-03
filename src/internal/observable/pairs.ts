@@ -1,4 +1,4 @@
-import { Observable } from '../Observable';
+import { RxObservable } from '../Observable';
 import { IScheduler } from '../Scheduler';
 import { Subscriber } from '../Subscriber';
 import { RxSubscription, Subscription } from '../Subscription';
@@ -35,9 +35,9 @@ import { Action } from '../scheduler/Action';
  * @returns {(Observable<[string, T]>)} An observable sequence of
  * [key, value] pairs from the object.
  */
-export function pairs<T>(obj: Object, scheduler?: IScheduler): Observable<[string, T]> {
+export function pairs<T>(obj: Object, scheduler?: IScheduler): RxObservable<[string, T]> {
   if (!scheduler) {
-    return new Observable<[string, T]>(subscriber => {
+    return new RxObservable<[string, T]>(subscriber => {
       const keys = Object.keys(obj);
       for (let i = 0; i < keys.length && !subscriber.closed; i++) {
         const key = keys[i];
@@ -48,7 +48,7 @@ export function pairs<T>(obj: Object, scheduler?: IScheduler): Observable<[strin
       subscriber.complete();
     });
   } else {
-    return new Observable<[string, T]>(subscriber => {
+    return new RxObservable<[string, T]>(subscriber => {
       const keys = Object.keys(obj);
       const subscription = new RxSubscription();
       subscription.add(

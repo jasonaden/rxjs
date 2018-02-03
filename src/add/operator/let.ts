@@ -1,12 +1,12 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { letProto } from '../../internal/patching/operator/let';
 
-Observable.prototype.let = letProto;
-Observable.prototype.letBind = letProto;
+RxObservable.prototype.let = letProto;
+RxObservable.prototype.letBind = letProto;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     let: typeof letProto;
     letBind: typeof letProto;
   }

@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { ignoreElements } from '../../internal/patching/operator/ignoreElements';
 
-Observable.prototype.ignoreElements = ignoreElements;
+RxObservable.prototype.ignoreElements = ignoreElements;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     ignoreElements: typeof ignoreElements;
   }
 }

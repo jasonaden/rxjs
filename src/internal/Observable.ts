@@ -18,17 +18,40 @@ export interface Subscribable<T> {
 export type SubscribableOrPromise<T> = Subscribable<T> | PromiseLike<T>;
 export type ObservableInput<T> = SubscribableOrPromise<T> | ArrayLike<T>;
 
+export interface Observable<T> extends Subscribable<T> {
+
+  lift<R>(operator: Operator<T, R>): Observable<R>;
+
+  subscribe(observer?: PartialObserver<T>): Subscription;
+  subscribe(next?: (value: T) => void, error?: (error: any) => void, complete?: () => void): Subscription;
+  subscribe(observerOrNext?: PartialObserver<T> | ((value: T) => void),
+            error?: (error: any) => void,
+            complete?: () => void): Subscription;
+
+  forEach(next: (value: T) => void, PromiseCtor?: typeof Promise): Promise<void>;
+
+  /* tslint:disable:max-line-length */
+  toPromise<T>(this: Observable<T>): Promise<T>;
+  toPromise<T>(this: Observable<T>, PromiseCtor: typeof Promise): Promise<T>;
+  toPromise<T>(this: Observable<T>, PromiseCtor: PromiseConstructorLike): Promise<T>;
+  /* tslint:enable:max-line-length */
+}
+
 /**
  * A representation of any set of values over any amount of time. This is the most basic building block
  * of RxJS.
  *
  * @class Observable<T>
  */
-export class Observable<T> implements Subscribable<T> {
+export class RxObservable<T> implements Observable<T> {
 
-  public _isScalar: boolean = false;
+  /** @internal */
+  // tslint:disable-next-line:no-unused-variable
+  private _isScalar: boolean = false;
 
-  protected source: Observable<any>;
+  /** @internal */
+  protected source: RxObservable<any>;
+  /** @internal */
   protected operator: Operator<any, T>;
 
   /**
@@ -38,7 +61,7 @@ export class Observable<T> implements Subscribable<T> {
    * can be `next`ed, or an `error` method can be called to raise an error, or
    * `complete` can be called to notify of a successful completion.
    */
-  constructor(subscribe?: (this: Observable<T>, subscriber: Subscriber<T>) => TeardownLogic) {
+  constructor(subscribe?: (this: RxObservable<T>, subscriber: Subscriber<T>) => TeardownLogic) {
     if (subscribe) {
       this._subscribe = subscribe;
     }
@@ -55,7 +78,7 @@ export class Observable<T> implements Subscribable<T> {
    * @return {Observable} a new cold observable
    */
   static create: Function = <T>(subscribe?: (subscriber: Subscriber<T>) => TeardownLogic) => {
-    return new Observable<T>(subscribe);
+    return new RxObservable<T>(subscribe);
   }
 
   /**
@@ -65,8 +88,8 @@ export class Observable<T> implements Subscribable<T> {
    * @param {Operator} operator the operator defining the operation to take on the observable
    * @return {Observable} a new observable with the Operator applied
    */
-  lift<R>(operator: Operator<T, R>): Observable<R> {
-    const observable = new Observable<R>();
+  lift<R>(operator: Operator<T, R>): RxObservable<R> {
+    const observable = new RxObservable<R>();
     observable.source = this;
     observable.operator = operator;
     return observable;
@@ -204,6 +227,7 @@ export class Observable<T> implements Subscribable<T> {
     return sink;
   }
 
+  /** @internal */
   protected _trySubscribe(sink: Subscriber<T>): TeardownLogic {
     try {
       return this._subscribe(sink);
@@ -249,6 +273,7 @@ export class Observable<T> implements Subscribable<T> {
     });
   }
 
+  /** @internal */
   protected _subscribe(subscriber: Subscriber<any>): TeardownLogic {
     return this.source.subscribe(subscriber);
   }
@@ -305,12 +330,6 @@ export class Observable<T> implements Subscribable<T> {
     return pipeFromArray(operations)(this);
   }
 
-  /* tslint:disable:max-line-length */
-  toPromise<T>(this: Observable<T>): Promise<T>;
-  toPromise<T>(this: Observable<T>, PromiseCtor: typeof Promise): Promise<T>;
-  toPromise<T>(this: Observable<T>, PromiseCtor: PromiseConstructorLike): Promise<T>;
-  /* tslint:enable:max-line-length */
-
   toPromise(PromiseCtor?: PromiseConstructorLike) {
     if (!PromiseCtor) {
       if (root.Rx && root.Rx.config && root.Rx.config.Promise) {
@@ -330,3 +349,8 @@ export class Observable<T> implements Subscribable<T> {
     }) as Promise<T>;
   }
 }
+
+let rxObs: RxObservable<any>;
+let Obs: Observable<any>;
+
+Obs = rxObs;

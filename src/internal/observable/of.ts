@@ -3,9 +3,9 @@ import { isScheduler } from '../util/isScheduler';
 import { fromArray } from './fromArray';
 import { empty } from './empty';
 import { scalar } from './scalar';
-import { Observable } from '../Observable';
+import { RxObservable } from '../Observable';
 
-export function of<T>(...args: Array<T | IScheduler>): Observable<T> {
+export function of<T>(...args: Array<T | IScheduler>): RxObservable<T> {
   let scheduler = args[args.length - 1] as IScheduler;
   if (isScheduler(scheduler)) {
     args.pop();

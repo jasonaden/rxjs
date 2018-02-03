@@ -1,12 +1,12 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 
 import { scan } from '../../internal/patching/operator/scan';
 
-Observable.prototype.scan = scan;
+RxObservable.prototype.scan = scan;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     scan: typeof scan;
   }
 }

@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { min } from '../../internal/patching/operator/min';
 
-Observable.prototype.min = min;
+RxObservable.prototype.min = min;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     min: typeof min;
   }
 }

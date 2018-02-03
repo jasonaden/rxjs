@@ -1,7 +1,7 @@
 import { root } from '../..//util/root';
 import { tryCatch } from '../..//util/tryCatch';
 import { errorObject } from '../..//util/errorObject';
-import { Observable } from '../../Observable';
+import { Observable, RxObservable } from '../../Observable';
 import { Subscriber } from '../../Subscriber';
 import { TeardownLogic } from '../../Subscription';
 import { map } from '../../../internal/operators/map';
@@ -58,13 +58,13 @@ function getXMLHttpRequest(): XMLHttpRequest {
 }
 
 export interface AjaxCreationMethod {
-  (urlOrRequest: string | AjaxRequest): Observable<AjaxResponse>;
-  get(url: string, headers?: Object): Observable<AjaxResponse>;
-  post(url: string, body?: any, headers?: Object): Observable<AjaxResponse>;
-  put(url: string, body?: any, headers?: Object): Observable<AjaxResponse>;
-  patch(url: string, body?: any, headers?: Object): Observable<AjaxResponse>;
-  delete(url: string, headers?: Object): Observable<AjaxResponse>;
-  getJSON<T>(url: string, headers?: Object): Observable<T>;
+  (urlOrRequest: string | AjaxRequest): RxObservable<AjaxResponse>;
+  get(url: string, headers?: Object): RxObservable<AjaxResponse>;
+  post(url: string, body?: any, headers?: Object): RxObservable<AjaxResponse>;
+  put(url: string, body?: any, headers?: Object): RxObservable<AjaxResponse>;
+  patch(url: string, body?: any, headers?: Object): RxObservable<AjaxResponse>;
+  delete(url: string, headers?: Object): RxObservable<AjaxResponse>;
+  getJSON<T>(url: string, headers?: Object): RxObservable<T>;
 }
 
 export function ajaxGet(url: string, headers: Object = null) {
@@ -105,7 +105,7 @@ export function ajaxGetJSON<T>(url: string, headers?: Object): Observable<T> {
  * @extends {Ignored}
  * @hide true
  */
-export class AjaxObservable<T> extends Observable<T> {
+export class AjaxObservable<T> extends RxObservable<T> {
   /**
    * Creates an observable for an Ajax request with either a request object with
    * url, headers, etc or a string for a URL.

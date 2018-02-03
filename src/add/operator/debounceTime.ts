@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { debounceTime } from '../../internal/patching/operator/debounceTime';
 
-Observable.prototype.debounceTime = debounceTime;
+RxObservable.prototype.debounceTime = debounceTime;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     debounceTime: typeof debounceTime;
   }
 }

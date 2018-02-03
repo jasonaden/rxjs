@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { race } from '../../internal/patching/operator/race';
 
-Observable.prototype.race = race;
+RxObservable.prototype.race = race;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     race: typeof race;
   }
 }

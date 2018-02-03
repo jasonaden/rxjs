@@ -1,4 +1,4 @@
-import { Observable } from '../Observable';
+import { RxObservable } from '../Observable';
 import { tryCatch } from '..//util/tryCatch';
 import { isFunction } from '..//util/isFunction';
 import { errorObject } from '..//util/errorObject';
@@ -50,13 +50,13 @@ export type SelectorMethodSignature<T> = (...args: Array<any>) => T;
  * @extends {Ignored}
  * @hide true
  */
-export class FromEventObservable<T> extends Observable<T> {
+export class FromEventObservable<T> extends RxObservable<T> {
 
   /* tslint:disable:max-line-length */
-  static create<T>(target: EventTargetLike, eventName: string): Observable<T>;
-  static create<T>(target: EventTargetLike, eventName: string, selector: SelectorMethodSignature<T>): Observable<T>;
-  static create<T>(target: EventTargetLike, eventName: string, options: EventListenerOptions): Observable<T>;
-  static create<T>(target: EventTargetLike, eventName: string, options: EventListenerOptions, selector: SelectorMethodSignature<T>): Observable<T>;
+  static create<T>(target: EventTargetLike, eventName: string): RxObservable<T>;
+  static create<T>(target: EventTargetLike, eventName: string, selector: SelectorMethodSignature<T>): RxObservable<T>;
+  static create<T>(target: EventTargetLike, eventName: string, options: EventListenerOptions): RxObservable<T>;
+  static create<T>(target: EventTargetLike, eventName: string, options: EventListenerOptions, selector: SelectorMethodSignature<T>): RxObservable<T>;
   /* tslint:enable:max-line-length */
 
   /**
@@ -178,7 +178,7 @@ export class FromEventObservable<T> extends Observable<T> {
   static create<T>(target: EventTargetLike,
                    eventName: string,
                    options?: EventListenerOptions | SelectorMethodSignature<T>,
-                   selector?: SelectorMethodSignature<T>): Observable<T> {
+                   selector?: SelectorMethodSignature<T>): RxObservable<T> {
     if (isFunction(options)) {
       selector = <any>options;
       options = undefined;

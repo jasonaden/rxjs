@@ -1,11 +1,11 @@
 
-import { Observable } from '../../internal/Observable';
+import { RxObservable } from '../../internal/Observable';
 import { bufferWhen } from '../../internal/patching/operator/bufferWhen';
 
-Observable.prototype.bufferWhen = bufferWhen;
+RxObservable.prototype.bufferWhen = bufferWhen;
 
 declare module '../../internal/Observable' {
-  interface Observable<T> {
+  interface RxObservable<T> {
     bufferWhen: typeof bufferWhen;
   }
 }
